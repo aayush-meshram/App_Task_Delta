@@ -1,106 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <TextView
-        android:text="@string/my_factor_game"
-        android:textSize="30dp"
         android:id="@+id/myTitle"
-        android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/my_factor_game"
+        android:textSize="30dp" />
 
     <TextView
-        android:text = "@string/enter_the_number"
-        android:layout_below="@+id/myTitle"
-        android:textSize="24dp"
         android:id="@+id/myInputText"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/myTitle"
+        android:text="@string/enter_the_number"
+        android:textSize="24dp" />
 
     <EditText
-        android:inputType="number"
         android:id="@+id/myInputNumber"
-        android:layout_below="@id/myTitle"
-        android:width="200dp"
-        android:layout_toRightOf="@+id/myInputText"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_below="@id/myTitle"
+        android:layout_toRightOf="@+id/myInputText"
+        android:width="200dp"
+        android:inputType="number" />
 
     <Button
-        android:text = "@string/enter"
-        android:id="@+id/myEnter"
+        android:id="@+id/enterButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/myInputText"
         android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:text="@string/enter" />
 
     <TextView
-        android:text="@string/now_find_the_factor"
+        android:id="@+id/firstTextBox"
         android:layout_width="wrap_content"
-        android:id="@+id/myFake"
-        android:textSize="28dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/secondButton"
         android:layout_centerHorizontal="true"
-        android:layout_above="@+id/mySecond"
-        android:layout_height="wrap_content"/>
+        android:text="@string/now_find_the_factor"
+        android:textSize="28dp" />
 
     <Button
-        android:text="@string/_1st"
-        android:id="@+id/myFirst"
-        android:layout_toLeftOf="@+id/mySecond"
+        android:id="@+id/firstButton"
         android:layout_width="wrap_content"
-        android:layout_below="@+id/myFake"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/firstTextBox"
+        android:layout_toLeftOf="@+id/secondButton"
+        android:text="@string/_1st" />
 
     <Button
-        android:text="@string/_2nd"
-        android:id="@+id/mySecond"
+        android:id="@+id/secondButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:text="@string/_2nd" />
 
     <Button
-        android:text="@string/_3rd"
-        android:id="@+id/myThird"
-        android:layout_toRightOf="@+id/mySecond"
-        android:layout_below="@id/myFake"
+        android:id="@+id/thirdButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/firstTextBox"
+        android:layout_toRightOf="@+id/secondButton"
+        android:text="@string/_3rd" />
 
     <TextView
-        android:text="@string/correct_wrong"
-        android:textSize="30dp"
         android:id="@+id/myFinalAnswer"
-        android:layout_below="@+id/mySecond"
-        android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/secondButton"
+        android:layout_centerHorizontal="true"
+        android:text="@string/correct_wrong"
+        android:textSize="30dp" />
 
     <Button
-        android:text="@string/try_again"
         android:id="@+id/myTryAgain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/myFinalAnswer"
         android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:text="@string/try_again" />
 
     <TextView
-        android:text="@string/best"
         android:id="@+id/myBest"
-        android:textSize="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/myTryAgain"
         android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:text="@string/best"
+        android:textSize="20dp" />
 
     <TextView
-        android:text="10"
         android:id="@+id/myTimer"
-        android:textSize="50dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/myBest"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_below="@id/myBest"
+        android:layout_centerHorizontal="true"
+        android:text="10"
+        android:textSize="50dp" />
 
 </RelativeLayout>

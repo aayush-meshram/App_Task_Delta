@@ -4,20 +4,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
-import android.text.InputType;
 import android.text.TextUtils;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
-import android.graphics.Color;
 import android.view.View;
-import android.content.res.Resources;
-import android.util.TypedValue;
 import android.widget.Toast;
 
 public class MainActivity extends Activity implements View.OnClickListener {
@@ -25,13 +19,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
     public int checkThis = 0;
     public int theChosenOne = 0;
     public int score;
-    public Button myFirst;
-    public Button mySecond;
-    public Button myThird;
-    public Button myEnter;
+    public Button firstButton;
+    public Button secondButton;
+    public Button thirdButton;
+    public Button enterButton;
     public Button myTryAgain;
     public EditText myNumber;
-    public TextView myInput, myTitle, myFinalAnswer, scoreStreak, myFake;
+    public TextView myInput, myTitle, myFinalAnswer, scoreStreak, firstTextBox;
     public TextView myTimer;
     private CountDownTimer countDownTimer;
     private long timeLeftInMilliSeconds = 10000;
@@ -42,76 +36,36 @@ public class MainActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-        myFirst = findViewById(R.id.myFirst);
-        mySecond = findViewById(R.id.mySecond);
-        myThird = findViewById(R.id.myThird);
+        firstButton = findViewById(R.id.firstButton);
+        secondButton = findViewById(R.id.secondButton);
+        thirdButton = findViewById(R.id.thirdButton);
         myTryAgain = findViewById(R.id.myTryAgain);
         myTitle = findViewById(R.id.myTitle);
         scoreStreak = findViewById(R.id.myBest);
         myInput = findViewById(R.id.myInputText);
         myNumber = findViewById(R.id.myInputNumber);
-        myEnter = findViewById(R.id.myEnter);
+        enterButton = findViewById(R.id.enterButton);
         myFinalAnswer = findViewById(R.id.myFinalAnswer);
-        myFake = findViewById(R.id.myFake);
+        firstTextBox = findViewById(R.id.firstTextBox);
         myTimer = findViewById(R.id.myTimer);
 
         loadData();
-        scoreStreak.setText("BEST : "+score);
+        scoreStreak.setText("BEST : " + score);
 
-        myFirst.setVisibility(View.INVISIBLE);
-        mySecond.setVisibility(View.INVISIBLE);
-        myThird.setVisibility(View.INVISIBLE);
+        firstButton.setVisibility(View.INVISIBLE);
+        secondButton.setVisibility(View.INVISIBLE);
+        thirdButton.setVisibility(View.INVISIBLE);
         myTryAgain.setVisibility(View.INVISIBLE);
         myFinalAnswer.setVisibility(View.INVISIBLE);
-        myFake.setVisibility(View.INVISIBLE);
+        firstTextBox.setVisibility(View.INVISIBLE);
         myTimer.setVisibility(View.INVISIBLE);
         myTryAgain.setOnClickListener(this);
-        myEnter.setOnClickListener(this);
-        myFirst.setOnClickListener(this);
-        mySecond.setOnClickListener(this);
-        myThird.setOnClickListener(this);
+        enterButton.setOnClickListener(this);
+        firstButton.setOnClickListener(this);
+        secondButton.setOnClickListener(this);
+        thirdButton.setOnClickListener(this);
 
 
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
     }
 
     public void saveData() {
@@ -152,31 +106,18 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 startActivity(intent);
                 break;
 
-            case (R.id.mySecond):
+            case (R.id.secondButton):
                 if (checkThis == 2) {
-                    myFirst.setVisibility(View.INVISIBLE);
-                    mySecond.setVisibility(View.INVISIBLE);
-                    myThird.setVisibility(View.INVISIBLE);
-                    myTryAgain.setVisibility(View.VISIBLE);
-                    myFake.setVisibility(View.INVISIBLE);
-                    myFinalAnswer.setVisibility(View.VISIBLE);
+                    choiceClicked();
                     myFinalAnswer.setText("CORRECT!");
-                    myTimer.setVisibility(View.INVISIBLE);
                     stopTimer();
                     score++;
                     saveData();
                     scoreStreak.setText("BEST : " + score);
                     view.setBackgroundResource(R.color.green);
                     saveData();
-                }
-                else {
-                    myFirst.setVisibility(View.INVISIBLE);
-                    mySecond.setVisibility(View.INVISIBLE);
-                    myThird.setVisibility(View.INVISIBLE);
-                    myTryAgain.setVisibility(View.VISIBLE);
-                    myFake.setVisibility(View.INVISIBLE);
-                    myFinalAnswer.setVisibility(View.VISIBLE);
-                    myTimer.setVisibility(View.INVISIBLE);
+                } else {
+                    choiceClicked();
                     stopTimer();
                     vibrator.vibrate(patt, -1);
                     score = 0;
@@ -185,17 +126,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     scoreStreak.setText("BEST : " + score);
                     view.setBackgroundResource(R.color.red);
                     saveData();
-                    }
+                }
                 break;
-            case (R.id.myFirst):
+            case (R.id.firstButton):
                 if (checkThis == 1) {
-                    myFirst.setVisibility(View.INVISIBLE);
-                    mySecond.setVisibility(View.INVISIBLE);
-                    myThird.setVisibility(View.INVISIBLE);
-                    myTryAgain.setVisibility(View.VISIBLE);
-                    myFake.setVisibility(View.INVISIBLE);
-                    myFinalAnswer.setVisibility(View.VISIBLE);
-                    myTimer.setVisibility(View.INVISIBLE);
+                    choiceClicked();
                     stopTimer();
                     score++;
                     saveData();
@@ -203,15 +138,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     view.setBackgroundResource(R.color.green);
                     myFinalAnswer.setText("CORRECT!");
                     saveData();
-                }
-                else {
-                    myFirst.setVisibility(View.INVISIBLE);
-                    mySecond.setVisibility(View.INVISIBLE);
-                    myThird.setVisibility(View.INVISIBLE);
-                    myTryAgain.setVisibility(View.VISIBLE);
-                    myFake.setVisibility(View.INVISIBLE);
-                    myFinalAnswer.setVisibility(View.VISIBLE);
-                    myTimer.setVisibility(View.INVISIBLE);
+                } else {
+                    choiceClicked();
                     stopTimer();
                     vibrator.vibrate(patt, -1);
                     score = 0;
@@ -223,15 +151,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 }
                 break;
 
-            case R.id.myThird:
+            case R.id.thirdButton:
                 if (checkThis == 3) {
-                    myFirst.setVisibility(View.INVISIBLE);
-                    mySecond.setVisibility(View.INVISIBLE);
-                    myThird.setVisibility(View.INVISIBLE);
-                    myTryAgain.setVisibility(View.VISIBLE);
-                    myFake.setVisibility(View.INVISIBLE);
-                    myFinalAnswer.setVisibility(View.VISIBLE);
-                    myTimer.setVisibility(View.INVISIBLE);
+                    choiceClicked();
                     stopTimer();
                     score++;
                     saveData();
@@ -240,13 +162,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     view.setBackgroundResource(R.color.green);
                     saveData();
                 } else {
-                    myFirst.setVisibility(View.INVISIBLE);
-                    mySecond.setVisibility(View.INVISIBLE);
-                    myThird.setVisibility(View.INVISIBLE);
-                    myTryAgain.setVisibility(View.VISIBLE);
-                    myFake.setVisibility(View.INVISIBLE);
-                    myFinalAnswer.setVisibility(View.VISIBLE);
-                    myTimer.setVisibility(View.INVISIBLE);
+                    choiceClicked();
                     stopTimer();
                     vibrator.vibrate(patt, -1);
                     score = 0;
@@ -258,80 +174,79 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 }
                 break;
 
-        case (R.id.myEnter):
-        if (TextUtils.isEmpty(myNumber.getText().toString())) {
-            Toast.makeText(MainActivity.this, "Enter a number first!", Toast.LENGTH_SHORT).show();
-            return;
-        }
+            case (R.id.enterButton):
+                if (TextUtils.isEmpty(myNumber.getText().toString())) {
+                    Toast.makeText(MainActivity.this, "Enter a number first!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
-        if(Integer.valueOf(myNumber.getText().toString()) == 1) {
-            Toast.makeText(MainActivity.this, "You want to know factors for 1?", Toast.LENGTH_SHORT).show();
-            return;
-        }
+                if (Integer.valueOf(myNumber.getText().toString()) == 0) {
+                    Toast.makeText(MainActivity.this, "You cannot find factors of 1!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
-        if (isPrime(Integer.valueOf(myNumber.getText().toString()))) {
-            Toast.makeText(MainActivity.this, "A prime number has only 2 factors, you should know that", Toast.LENGTH_SHORT).show();
-            return;
-        }
+                if (Integer.valueOf(myNumber.getText().toString()) == 1) {
+                    Toast.makeText(MainActivity.this, "You want to know factors for 1?", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
-        myFake.setText("Now, find the factor of " + (myNumber.getText().toString()));
-        myEnter.setVisibility(View.INVISIBLE);
-        myInput.setVisibility(View.INVISIBLE);
-        myNumber.setVisibility(View.INVISIBLE);
-        myFirst.setVisibility(View.VISIBLE);
-        mySecond.setVisibility(View.VISIBLE);
-        myFake.setVisibility(View.VISIBLE);
-        myThird.setVisibility(View.VISIBLE);
-        myTimer.setVisibility(View.VISIBLE);
-        startTimer();
-        int no;
-        no = Integer.valueOf(myNumber.getText().toString());
+                if (isPrime(Integer.valueOf(myNumber.getText().toString()))) {
+                    Toast.makeText(MainActivity.this, "A prime number has only 2 factors, you should know that", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
-        int not1 = 0, not2 = 0;
-        while (true) {
-            theChosenOne = (int) (100000 * Math.random());
-            if (theChosenOne != 0 && no % theChosenOne == 0 && theChosenOne != 1)
+                firstTextBox.setText("Now, find the factor of " + (myNumber.getText().toString()));
+                visibilityEnter();
+                startTimer();
+                int no;
+                no = Integer.valueOf(myNumber.getText().toString());
+
+                int not1 = 0, not2 = 0;
+                while (true) {
+                    theChosenOne = (int) (100000 * Math.random());
+                    if (theChosenOne != 0 && no % theChosenOne == 0 && theChosenOne != 1)
+                        break;
+                }
+
+                while (true) {
+                    not1 = (int) (100000 * Math.random());
+                    if (not1 != 0 && no >= not1 && no % not1 != 0)
+                        break;
+                }
+
+                while (true) {
+                    not2 = (int) (100000 * Math.random());
+                    if (not2 != 0 && no >= not2 && no % not2 != 0)
+                        break;
+                }
+
+                int chose = (int) (100 * Math.random());
+                if (chose < 33) {
+                    firstButton.setText(String.valueOf(theChosenOne));
+                    secondButton.setText(String.valueOf(not1));
+                    thirdButton.setText(String.valueOf(not2));
+                    checkThis = 1;
+                } else if (chose >= 33 || chose < 66) {
+                    secondButton.setText(String.valueOf(theChosenOne));
+                    firstButton.setText(String.valueOf(not1));
+                    thirdButton.setText(String.valueOf(not2));
+                    checkThis = 2;
+                } else {
+                    thirdButton.setText(String.valueOf(theChosenOne));
+                    secondButton.setText(String.valueOf(not1));
+                    firstButton.setText(String.valueOf(not2));
+                    checkThis = 3;
+                }
                 break;
         }
+    }
 
-        while (true) {
-            not1 = (int) (100000 * Math.random());
-            if (not1 != 0 && no >= not1 && no % not1 != 0)
-                break;
-        }
-
-        while (true) {
-            not2 = (int) (100000 * Math.random());
-            if (not2 != 0 && no >= not2 && no % not2 != 0)
-                break;
-        }
-
-        int chose = (int) (100 * Math.random());
-        if (chose < 33 ) {
-            myFirst.setText(String.valueOf(theChosenOne));
-            mySecond.setText(String.valueOf(not1));
-            myThird.setText(String.valueOf(not2));
-            checkThis = 1;
-        } else if (chose >= 33 || chose < 66) {
-            mySecond.setText(String.valueOf(theChosenOne));
-            myFirst.setText(String.valueOf(not1));
-            myThird.setText(String.valueOf(not2));
-            checkThis = 2;
-        } else {
-            myThird.setText(String.valueOf(theChosenOne));
-            mySecond.setText(String.valueOf(not1));
-            myFirst.setText(String.valueOf(not2));
-            checkThis = 3;
-        }
-        break;
-        }
-        }
     public void startTimer() {
         countDownTimer = new CountDownTimer(timeLeftInMilliSeconds, 1000) {
             @Override
             public void onTick(long l) {
                 timeLeftInMilliSeconds = l;
-                String time = String.valueOf(timeLeftInMilliSeconds/1000);
+                String time = String.valueOf(timeLeftInMilliSeconds / 1000);
                 myTimer.setText(time);
             }
 
@@ -339,11 +254,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
             public void onFinish() {
                 final Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
                 final long patt[] = new long[]{0, 500};
-                myFake.setVisibility(View.INVISIBLE);
-                myFirst.setVisibility(View.INVISIBLE);
-                mySecond.setVisibility(View.INVISIBLE);
-                myThird.setVisibility(View.INVISIBLE);
-                myTryAgain.setVisibility(View.VISIBLE);
+                visibilityFinish();
                 score = 0;
                 saveData();
                 vibrator.vibrate(patt, -1);
@@ -352,7 +263,38 @@ public class MainActivity extends Activity implements View.OnClickListener {
             }
         }.start();
     }
+
     public void stopTimer() {
         countDownTimer.cancel();
+    }
+
+    public void visibilityFinish() {
+        firstTextBox.setVisibility(View.INVISIBLE);
+        firstButton.setVisibility(View.INVISIBLE);
+        secondButton.setVisibility(View.INVISIBLE);
+        thirdButton.setVisibility(View.INVISIBLE);
+        myTryAgain.setVisibility(View.VISIBLE);
+    }
+
+    public void visibilityEnter() {
+        enterButton.setVisibility(View.INVISIBLE);
+        myInput.setVisibility(View.INVISIBLE);
+        myNumber.setVisibility(View.INVISIBLE);
+        firstButton.setVisibility(View.VISIBLE);
+        secondButton.setVisibility(View.VISIBLE);
+        firstTextBox.setVisibility(View.VISIBLE);
+        thirdButton.setVisibility(View.VISIBLE);
+        myTimer.setVisibility(View.VISIBLE);
+    }
+
+    public void choiceClicked() {
+
+        firstButton.setVisibility(View.INVISIBLE);
+        secondButton.setVisibility(View.INVISIBLE);
+        thirdButton.setVisibility(View.INVISIBLE);
+        myTryAgain.setVisibility(View.VISIBLE);
+        firstTextBox.setVisibility(View.INVISIBLE);
+        myFinalAnswer.setVisibility(View.VISIBLE);
+        myTimer.setVisibility(View.INVISIBLE);
     }
 }
